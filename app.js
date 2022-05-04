@@ -30,7 +30,7 @@ const friendData = [
         satisfaction: 2,
     },
 ];
-console.log(friendData);
+//console.log(friendData);
 
 addMushroomButton.addEventListener('click', () => {
     if (Math.random() > 0.5) {
@@ -46,9 +46,8 @@ addMushroomButton.addEventListener('click', () => {
 addFriendButton.addEventListener('click', () => {
     // get the name from the input
     // create a new friend object
-
     const newFriend = {
-        name: friendInputEl.value, 
+        name: friendInputEl.value || `friend ${Math.floor(Math.random() * 500)}`, 
         satisfaction: 1,
     };
     // push it into the friends state array, passed in as an argument
@@ -66,7 +65,6 @@ function displayFriends() {
     for (let friend of friendData) {
         // use renderFriend to make a friendEl
         const friendEl = renderFriend(friend);
-        
         // this is a clickable list, so . . .
         //     add an event listener to each friend
         //LEAVE TIL THE END 
@@ -78,12 +76,13 @@ function displayFriends() {
                 mushroomCount--;
                 displayFriends();
                 displayMushrooms();
-            } else alert ('no more mushrooms!');
+            } else if (friend.satisfaction === 3){
+                alert ('dont be greedy!');
+                return;
+            } else alert ('you might want to hunt for more mushrooms...');
         //then display your friends and mushrooms with the updated state
-
-
         });
-                // append the friendEl to the friends list in DOM
+        // append the friendEl to the friends list in DOM
         friendsEl.append(friendEl);
     }
 
@@ -92,11 +91,9 @@ function displayFriends() {
 function displayMushrooms() {
     // clear out the mushroom div
     mushroomsEl.textContent = ''; //if theres a prob come back here
-    
     for (let i = 0; i < mushroomCount; i++) {
         // for each mushroom in your mushroom state, render and append a mushroom
         const mushroomEl = renderMushroom(i);
-
         mushroomsEl.append(mushroomEl);
     }
 }
