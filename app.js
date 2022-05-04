@@ -78,7 +78,7 @@ function displayFriends() {
                 mushroomCount--;
                 displayFriends();
                 displayMushrooms();
-            } 
+            } else alert ('no more mushrooms!');
         //then display your friends and mushrooms with the updated state
 
 
