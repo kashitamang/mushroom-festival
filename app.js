@@ -52,9 +52,8 @@ addFriendButton.addEventListener('click', () => {
     };
     // push it into the friends state array, passed in as an argument
     friendData.push(newFriend);
-  
     // reset the input
-
+    friendInputEl.value = '';
     // display all the friends (use a function here)
 });
 
