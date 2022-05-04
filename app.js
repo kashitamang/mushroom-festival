@@ -63,22 +63,30 @@ function displayFriends() {
     // clear out the friends in DOM
     friendsEl.textContent = '';
     // for each friend in state . . .
-    for (let booger of friendData) {
+    for (let friend of friendData) {
         // use renderFriend to make a friendEl
-        const friendEl = renderFriend(booger);
-
-        friendsEl.append(friendEl);
+        const friendEl = renderFriend(friend);
+        
         // this is a clickable list, so . . .
-
         //     add an event listener to each friend
         //LEAVE TIL THE END 
-        
-        //         and if the friend's satisfaction level is below 3 and you have mushrooms left
-        //             increment the friends satisfaction and decrement your mushrooms
-        //             then display your friends and mushrooms with the updated state
+        friendEl.addEventListener('click', () => {
+        //and if the friend's satisfaction level is below 3 and you have mushrooms left
+        //increment the friends satisfaction and decrement your mushrooms
+            if (friend.satisfaction < 3 && mushroomCount > 0) {
+                friend.satisfaction++;
+                mushroomCount--;
+                displayFriends();
+                displayMushrooms();
+            } 
+        //then display your friends and mushrooms with the updated state
 
-        // append the friendEl to the friends list in DOM
+
+        });
+                // append the friendEl to the friends list in DOM
+        friendsEl.append(friendEl);
     }
+
 }
 
 function displayMushrooms() {
